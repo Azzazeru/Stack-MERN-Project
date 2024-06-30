@@ -2,6 +2,7 @@ import express from 'express'
 import morgan from 'morgan'
 import cors from 'cors'
 import authRoutes from './routes/auth.routes.js'
+import taskRoutes from './routes/task.routes.js'
 import ping from './routes/ping.routes.js'
 import cookieParser from 'cookie-parser'
 import { FRONTEND_URL } from './config.js'
@@ -16,8 +17,8 @@ app.use(cors({
 }))
 
 app.use("/api", authRoutes)
+app.use("/api", taskRoutes)
 app.use(ping)
-
 
 
 export default app;
