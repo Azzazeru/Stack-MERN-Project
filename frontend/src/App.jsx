@@ -1,31 +1,22 @@
-import { useState } from 'react'
-import './App.css'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import RegisterPage from './pages/RegisterPage';
+import LoginPage from './pages/LoginPage';
 
-const URL = import.meta.env.VITE_BACKEND_URL;
 
 function App() {
-  const [result, setResult] = useState('')
-
-  return (
-    <>
-      <div className="app">
-        <h1>MERN Render</h1>
-        <button onClick={async() => {
-          const res = await fetch(`${URL}/ping`)
-          const data = await res.json()
-          console.log(data)
-          setResult(data)
-          }}>
-            Users
-          </button>
-
-          <pre>
-            {JSON.stringify(result, null, 2)}
-          </pre>
-
-      </div>
-    </>
-  )
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route path="/home" element={<h1>Home</h1>} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/register" element={<RegisterPage />} />
+                <Route path="/tasks" element={<h1>Tasks</h1>} />
+                <Route path="/add-tasks" element={<h1>New Task</h1>} />
+                <Route path="/tasks/:id" element={<h1>Update Task</h1>} />
+                <Route path="/profile" element={<h1>Profile</h1>} />
+            </Routes>
+        </BrowserRouter>
+    )
 }
 
 export default App
