@@ -5,7 +5,6 @@ import authRoutes from './routes/auth.routes.js'
 import taskRoutes from './routes/task.routes.js'
 import ping from './routes/ping.routes.js'
 import cookieParser from 'cookie-parser'
-import { FRONTEND_URL } from './config.js'
 
 const app = express()
 
@@ -14,7 +13,7 @@ app.use(express.json())
 app.use(cookieParser())
 // app.use(cors()) // Todos permitidos
 app.use(cors({
-    origin: FRONTEND_URL,
+    origin: true,
     credentials: true,
 }))
 
