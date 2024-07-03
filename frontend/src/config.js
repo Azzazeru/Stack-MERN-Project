@@ -1,1 +1,1 @@
-export const API_URL = "https://backend-mern-ybza.onrender.com/api";
+export const API_URL = import.meta.env.VITE_BACKEND_URL || "https://backend-mern-ybza.onrender.com/api";

@@ -1,7 +1,8 @@
-import User from '../models/user.model.js'
 import bcrypt from 'bcryptjs'
-import { createAccessToken } from '../libs/jwt.js'
 import jwt from 'jsonwebtoken';
+
+import User from '../models/user.model.js'
+import { createAccessToken } from '../libs/jwt.js'
 import { TOKEN_SECRET } from '../config.js';
 
 
@@ -27,7 +28,11 @@ export const register = async (req, res) => {
         const userSaved = await newUser.save()
         const token = await createAccessToken({ id: userSaved._id })
 
-        res.cookie('token', token)
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: true,
+            sameSite: "none",
+        });
 
         res.json({
             id: userSaved._id,
@@ -58,7 +63,11 @@ export const login = async (req, res) => {
 
         const token = await createAccessToken({ id: userFound._id })
 
-        res.cookie('token', token)
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: true,
+            sameSite: "none",
+        });
 
         res.json({
             id: userFound._id,
@@ -75,7 +84,11 @@ export const login = async (req, res) => {
 }
 
 export const logout = async (req, res) => {
-    res.cookie('token', "", { expires: new Date(0) },)
+    res.cookie("token", "", {
+        httpOnly: true,
+        secure: true,
+        expires: new Date(0),
+    });
     return res.sendStatus(200);
 }
 
