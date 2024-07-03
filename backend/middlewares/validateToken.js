@@ -3,18 +3,21 @@ import { TOKEN_SECRET } from '../config.js'
 
 export const authRequired = (req, res, next) => {
 
-    const { token } = req.cookies
-    if (!token) return res.status(401).json({ message: 'Unauthorized' })
+    try {
+        const { token } = req.cookies
+        console.log('Token:', token);
+        if (!token) return res.status(401).json({ message: 'Unauthorized' })
 
-    jwt.verify(token, TOKEN_SECRET, (err, user) => {
-        if (err) return res.status(403).json({ message: 'Unauthorized' })
+        jwt.verify(token, TOKEN_SECRET, (err, user) => {
+            if (err) return res.status(403).json({ message: 'Unauthorized' })
 
-        req.user = user
+            req.user = user
 
-        // console.log(user)
+            next()
 
-        next()
-
-    })
+        })
+    } catch (error) {
+        return res.status(500).json({ message: error.message })
+    }
 
 }

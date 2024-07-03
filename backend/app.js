@@ -21,5 +21,4 @@ app.use("/api", authRoutes)
 app.use("/api", taskRoutes)
 app.use(ping)
 
-
 export default app;
