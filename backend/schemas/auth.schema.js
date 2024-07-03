@@ -8,5 +8,5 @@ export const registerSchema = z.object({
 
 export const loginSchema = z.object({
     username: z.string({ required_error: 'Username is Required' }),
-    password: z.string({ required_error: 'Password is Required' }).min(6, { message: 'Password must be at least 6 characters' })
+    password: z.string({ required_error: 'Password is Required' })
 })

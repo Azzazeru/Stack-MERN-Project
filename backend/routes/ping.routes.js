@@ -6,6 +6,4 @@ const router = Router()
 
 router.get('/ping', pong)
 
-clg
-
 export default router
